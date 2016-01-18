@@ -1,42 +1,47 @@
-/*
-Navicat MySQL Data Transfer
+-- phpMyAdmin SQL Dump
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jan 18, 2016 at 08:13 PM
+-- Server version: 5.5.46-0ubuntu0.14.04.2
+-- PHP Version: 5.5.9-1ubuntu4.14
 
-Source Server         : localhost
-Source Server Version : 50617
-Source Host           : localhost:3306
-Source Database       : taximate
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-Target Server Type    : MYSQL
-Target Server Version : 50617
-File Encoding         : 65001
 
-Date: 2016-01-18 19:45:36
-*/
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
-SET FOREIGN_KEY_CHECKS=0;
--- ----------------------------
--- Table structure for `badges`
--- ----------------------------
-DROP TABLE IF EXISTS `badges`;
-CREATE TABLE `badges` (
+--
+-- Database: `taximate`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `badges`
+--
+
+CREATE TABLE IF NOT EXISTS `badges` (
   `VerifiedDriver` tinyint(1) DEFAULT NULL,
   `HotDriver` varchar(45) DEFAULT NULL,
   `Driver_id` int(11) NOT NULL,
-  PRIMARY KEY (`Driver_id`),
-  CONSTRAINT `fk_Badges_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`Driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of badges
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `customer`
--- ----------------------------
-DROP TABLE IF EXISTS `customer`;
-CREATE TABLE `customer` (
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE IF NOT EXISTS `customer` (
   `id` varchar(45) NOT NULL,
-  `fistName` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `contactNo` varchar(20) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
@@ -46,101 +51,116 @@ CREATE TABLE `customer` (
   UNIQUE KEY `contactNo` (`contactNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of customer
--- ----------------------------
-INSERT INTO `customer` VALUES ('', '', '', '', null, '0000-00-00', '');
-INSERT INTO `customer` VALUES ('1', 'Sunil', 'Perera', '1234567', null, '0000-00-00', '1234');
-INSERT INTO `customer` VALUES ('2', 'Nimal', 'Shantha', '12345678', null, '0000-00-00', '1234');
-INSERT INTO `customer` VALUES ('3', 'Asela', 'Pieris', '123456789', null, '0000-00-00', '1234');
-INSERT INTO `customer` VALUES ('4', 'Mega', 'Kularatne', '345629390', null, '0000-00-00', '1234');
-INSERT INTO `customer` VALUES ('5', 'Dinesh', 'Senvairatne', '123', null, '0000-00-00', '1234');
+--
+-- Dumping data for table `customer`
+--
 
--- ----------------------------
--- Table structure for `driver`
--- ----------------------------
-DROP TABLE IF EXISTS `driver`;
-CREATE TABLE `driver` (
+INSERT INTO `customer` (`id`, `firstName`, `lastName`, `contactNo`, `email`, `date`, `password`) VALUES
+('1', 'Sunil', 'Perera', '1234567', NULL, '0000-00-00', '1234'),
+('2', 'Nimal', 'Shantha', '12345678', NULL, '0000-00-00', '1234'),
+('3', 'Asela', 'Pieris', '123456789', NULL, '0000-00-00', '1234'),
+('4', 'Mega', 'Kularatne', '345629390', NULL, '0000-00-00', '1234'),
+('5', 'Dinesh', 'Senvairatne', '123', NULL, '0000-00-00', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `driver`
+--
+
+CREATE TABLE IF NOT EXISTS `driver` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fistName` varchar(45) NOT NULL,
+  `firstName` varchar(45) NOT NULL,
   `lastName` varchar(45) NOT NULL,
   `email` varchar(45) DEFAULT NULL,
   `availability` int(45) NOT NULL,
   `contactNo` varchar(45) NOT NULL,
   `password` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
--- ----------------------------
--- Records of driver
--- ----------------------------
-INSERT INTO `driver` VALUES ('1', 'Nimal', 'Perera', 'nimal@gmail.com', '1', '1234567890', '1234');
-INSERT INTO `driver` VALUES ('2', 'Sunil', 'Nanayakkara', 'sunil@gmail.com', '1', '123456789', '1234');
-INSERT INTO `driver` VALUES ('3', 'Wasantha', 'Perera', 'wasantha@gmail.com', '1', '123', '1234');
+--
+-- Dumping data for table `driver`
+--
 
--- ----------------------------
--- Table structure for `driverprofile`
--- ----------------------------
-DROP TABLE IF EXISTS `driverprofile`;
-CREATE TABLE `driverprofile` (
+INSERT INTO `driver` (`id`, `firstName`, `lastName`, `email`, `availability`, `contactNo`, `password`) VALUES
+(1, 'Nimal', 'Perera', 'nimal@gmail.com', 1, '1234567890', '1234'),
+(2, 'Sunil', 'Nanayakkara', 'sunil@gmail.com', 1, '123456789', '1234'),
+(3, 'Wasantha', 'Perera', 'wasantha@gmail.com', 1, '123', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `driverprofile`
+--
+
+CREATE TABLE IF NOT EXISTS `driverprofile` (
   `Driver_id` int(11) NOT NULL,
   `vehicleType` varchar(45) NOT NULL,
   `vehicleModel` varchar(45) DEFAULT NULL,
   `discription` varchar(45) NOT NULL,
   `rating` float DEFAULT NULL,
   `registeredDate` date NOT NULL,
-  PRIMARY KEY (`Driver_id`),
-  CONSTRAINT `fk_driverProfile_Driver` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`Driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of driverprofile
--- ----------------------------
-INSERT INTO `driverprofile` VALUES ('1', 'Car', 'Corolla', 'Iam a good driver', null, '2016-01-18');
-INSERT INTO `driverprofile` VALUES ('2', 'Tuk Tuk', '4stroke', 'I am a friendly tuk tuk friver', null, '2016-01-18');
+--
+-- Dumping data for table `driverprofile`
+--
 
--- ----------------------------
--- Table structure for `fare`
--- ----------------------------
-DROP TABLE IF EXISTS `fare`;
-CREATE TABLE `fare` (
+INSERT INTO `driverprofile` (`Driver_id`, `vehicleType`, `vehicleModel`, `discription`, `rating`, `registeredDate`) VALUES
+(1, 'Car', 'Corolla', 'Iam a good driver', NULL, '2016-01-18'),
+(2, 'Tuk Tuk', '4stroke', 'I am a friendly tuk tuk friver', NULL, '2016-01-18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fare`
+--
+
+CREATE TABLE IF NOT EXISTS `fare` (
   `Driver_id` int(11) NOT NULL,
   `dayTimeFare` float NOT NULL,
   `nightTimeFare` float NOT NULL,
   `specialFare` float DEFAULT NULL,
-  PRIMARY KEY (`Driver_id`),
-  CONSTRAINT `fk_fare_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`Driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of fare
--- ----------------------------
-INSERT INTO `fare` VALUES ('1', '100', '150', null);
-INSERT INTO `fare` VALUES ('2', '40', '50', null);
+--
+-- Dumping data for table `fare`
+--
 
--- ----------------------------
--- Table structure for `favoritedrivers`
--- ----------------------------
-DROP TABLE IF EXISTS `favoritedrivers`;
-CREATE TABLE `favoritedrivers` (
+INSERT INTO `fare` (`Driver_id`, `dayTimeFare`, `nightTimeFare`, `specialFare`) VALUES
+(1, 100, 150, NULL),
+(2, 40, 50, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favoritedrivers`
+--
+
+CREATE TABLE IF NOT EXISTS `favoritedrivers` (
   `Customer_id` varchar(45) NOT NULL,
   `Driver_id` int(11) NOT NULL,
   PRIMARY KEY (`Customer_id`,`Driver_id`),
-  KEY `fk_FavoriteDrivers_Driver1_idx` (`Driver_id`),
-  CONSTRAINT `fk_FavoriteDrivers_Customer1` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_FavoriteDrivers_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_FavoriteDrivers_Driver1_idx` (`Driver_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of favoritedrivers
--- ----------------------------
-INSERT INTO `favoritedrivers` VALUES ('1', '1');
+--
+-- Dumping data for table `favoritedrivers`
+--
 
--- ----------------------------
--- Table structure for `hire`
--- ----------------------------
-DROP TABLE IF EXISTS `hire`;
-CREATE TABLE `hire` (
+INSERT INTO `favoritedrivers` (`Customer_id`, `Driver_id`) VALUES
+('1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hire`
+--
+
+CREATE TABLE IF NOT EXISTS `hire` (
   `date` date NOT NULL,
   `time` varchar(45) NOT NULL,
   `distance` float NOT NULL,
@@ -152,63 +172,103 @@ CREATE TABLE `hire` (
   `Driver_id` int(11) NOT NULL,
   `Customer_id` varchar(45) NOT NULL,
   PRIMARY KEY (`Driver_id`,`Customer_id`),
-  KEY `fk_Hire_Customer1_idx` (`Customer_id`),
-  CONSTRAINT `fk_Hire_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Hire_Customer1` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `fk_Hire_Customer1_idx` (`Customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of hire
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `migrations`
--- ----------------------------
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE `migrations` (
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- ----------------------------
--- Records of migrations
--- ----------------------------
-INSERT INTO `migrations` VALUES ('2014_10_12_000000_create_users_table', '1');
-INSERT INTO `migrations` VALUES ('2014_10_12_100000_create_password_resets_table', '1');
+--
+-- Dumping data for table `migrations`
+--
 
--- ----------------------------
--- Table structure for `password_resets`
--- ----------------------------
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE `password_resets` (
+INSERT INTO `migrations` (`migration`, `batch`) VALUES
+('2014_10_12_000000_create_users_table', 1),
+('2014_10_12_100000_create_password_resets_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `password_resets_email_index` (`email`),
   KEY `password_resets_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- ----------------------------
--- Records of password_resets
--- ----------------------------
+-- --------------------------------------------------------
 
--- ----------------------------
--- Table structure for `users`
--- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL,
-  `updated_at` timestamp NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
--- ----------------------------
--- Records of users
--- ----------------------------
-INSERT INTO `users` VALUES ('1', 'dinuka', 'dinukasal@gmail.com', '1234', null, '2016-01-18 07:20:50', '2016-01-18 07:20:50');
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'dinuka', 'dinukasal@gmail.com', '1234', NULL, '2016-01-18 01:50:50', '2016-01-18 01:50:50');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `badges`
+--
+ALTER TABLE `badges`
+  ADD CONSTRAINT `fk_Badges_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `driverprofile`
+--
+ALTER TABLE `driverprofile`
+  ADD CONSTRAINT `fk_driverProfile_Driver` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `fare`
+--
+ALTER TABLE `fare`
+  ADD CONSTRAINT `fk_fare_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `favoritedrivers`
+--
+ALTER TABLE `favoritedrivers`
+  ADD CONSTRAINT `fk_FavoriteDrivers_Customer1` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_FavoriteDrivers_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `hire`
+--
+ALTER TABLE `hire`
+  ADD CONSTRAINT `fk_Hire_Customer1` FOREIGN KEY (`Customer_id`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Hire_Driver1` FOREIGN KEY (`Driver_id`) REFERENCES `driver` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

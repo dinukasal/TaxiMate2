@@ -43,3 +43,5 @@ Route::post('login','LoginController@login');
 Route::get('login','LoginController@login');
 
 Route::get('drivers','DriverController@getAll');
+
+Route::post('register','UserController@registerUser');
