@@ -5,6 +5,6 @@ namespace App\Http\Controllers;
 class TestController extends Controller
 {
 	public function test(){
-		return "controller ok";
+		return view('request',['title'=>'request']);
 	}
 }

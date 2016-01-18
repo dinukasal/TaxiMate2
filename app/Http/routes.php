@@ -32,6 +32,10 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('test','TestController@test');
 
+Route::post('request',function(){
+	return var_dump($_POST);
+});
+
 Route::get('a',['middleware'=>'auth.basic',function(){
 	return 'authenticated';
 }]);
