@@ -30,12 +30,16 @@ Route::group(['middleware' => ['web']], function () {
     //
 });
 
+Route::get('a',['middleware'=>'auth.basic']);
+
 Route::get('test','TestController@test');
 
 Route::post('request',function(){
-	return var_dump($_POST);
+	return view('request');
 });
 
-Route::get('a',['middleware'=>'auth.basic',function(){
-	return 'authenticated';
-}]);
+Route::post('login','LoginController@login');
+
+Route::get('login','LoginController@login');
+
+Route::get('drivers','DriverController@getAll');
