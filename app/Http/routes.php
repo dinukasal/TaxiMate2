@@ -45,3 +45,11 @@ Route::get('login','LoginController@login');
 Route::get('drivers','DriverController@getAll');
 
 Route::post('register','UserController@registerUser');
+
+Route::post('updateuser','UserController@registerUser');
+
+Route::post('getuser','UserController@getUser');
+
+Route::post('checkavailability','DriverController@checkAvailability');
+
+Route::post('updaterates','DriverController@updateRates');

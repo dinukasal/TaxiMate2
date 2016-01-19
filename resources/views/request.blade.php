@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-	<form method="post" action="{{ url('/register') }}">
+	<form method="post" action="{{ url('/checkavailability') }}">
 		<label>first name</label>
 		<input name="firstName" type="text"></input>
 		<label>second name</label>

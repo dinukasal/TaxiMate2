@@ -34,9 +34,21 @@ class Driver extends Model
 				$driver->email,
 				$driver->nic,
 				$driver->availability,
-
-				]
-				)
+				$driver->contactNo,
+				$driver->password ]
+				);
 		}
 	}
+    public function getDriver($contactNo){
+    	return DB::select('SELECT * from driver where contactNo=\''.$contactNo.'\'');
+    }
+    public function checkAvailability($contactNo){
+    	$availability= DB::select('SELECT availability FROM driver 
+    					where contactNo=\''.$contactNo.'\'');
+    	if($availability){
+    		return $availability;
+    	}else{
+    		return 'no user with contactNo:'.$contactNo;
+    	}
+    }
 }

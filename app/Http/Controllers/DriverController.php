@@ -14,6 +14,13 @@ class DriverController extends Controller
     public function getAll(){
     	$driver=new Driver;
     	return $driver->getAll();
-    	//return DB::select('SELECT * from driver');
+    }
+    public function checkAvailability(Request $request){
+    	$driver=new Driver;
+    	$availability=$driver->checkAvailability($request->contactNo)[0]->availability;
+    	return $availability;
+    }
+    public function updateRates(Request $request){
+
     }
 }
