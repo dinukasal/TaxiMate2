@@ -52,11 +52,57 @@ class Driver extends Model
     	}
     }
     public function changePassword($contactNo,$password){
-    	$changed=DB::update('UPDATE driver SET password=\''.$password
-    				.'\' WHERE contactNo=\''.$contactNo.'\''
+    	$changed=DB::update("UPDATE driver SET password='".$password
+    				."' WHERE contactNo='".$contactNo."'"
     		);
     	if($changed){
     		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
+    public function getProfile($contactNo){
+    	$driver=DB::select("SELECT * FROM driver natural join driverprofile WHERE contactNo='".$contactNo."'");
+    	if($driver){
+    		return $driver;
+    	}else{
+    		return 0;
+    	}
+    }
+    public function updateProfile(Driver $driver){
+    	$driverid=DB::select("SELECT id FROM driver where contactNo='".$driver->contactNo."'");
+    	if($driverid){
+	    	$vehicleType=$driver->vehicleType;
+	    	$vehicleModel=$driver->vehicleModel;
+	    	$discription=$driver->discription;
+	    	$updated=DB::update(" UPDATE driverprofile SET
+	    						Driver_id='".$driverid[0]->id."'
+	    						vehicleType='".$vehicleType."',
+	    						vehicleModel='".$vehicleModel."',
+	    						discription='".$discription."'
+	    		");
+    	}
+    }
+    public function updateRates($contactNo,$rates){
+    	$driverid=DB::select("SELECT id FROM driver where contactNo='".$contactNo."'")[0]->id;
+
+    	if($driverid){
+	    	if(isset($rates['specialFare'])){
+	    		$updated=DB::update("
+				UPDATE fare SET 
+				specialFare='".$rates['specialFare']."'
+				WHERE Driver_id='".$driverid."'
+				");
+				return $updated;
+	    	}else{
+	    		$updated=DB::update("
+	    					UPDATE fare SET 
+	    					dayTimeFare='".$rates['dayTimeFare']."'
+	    					nightTimeFare='".$rates['nightTimeFare']."'
+	    					WHERE Driver_id='".$driverid."'
+	    			");	    	
+	    		return $updated;
+	    	}
     	}else{
     		return 0;
     	}

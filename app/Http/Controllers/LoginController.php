@@ -23,10 +23,16 @@ class LoginController extends Controller
 			$contactNo.'\''
 			);
 		if($user){
-
-			return $user[0]->firstName;
+			$user=DB::select('SELECT firstName FROM '.$user.' WHERE contactNo=\''.
+			$contactNo.'\' AND password=\''.$password."'"
+			);
+			if($user){
+				return $user[0]->firstName;
+			}else{
+				return -1;
+			}
 		}else{
-			return 'error';
+			return 0;
 		}
 	}
 }

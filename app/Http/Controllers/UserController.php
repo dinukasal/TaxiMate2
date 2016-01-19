@@ -40,10 +40,10 @@ class UserController extends Controller
     public function changePassword(Request $request){
         if($request->input('user')=='passenger'){
             $user=new Passenger;
-            $user->changePassword($request->input('contactNo'),$request->input('password'));
+            return $user->changePassword($request->input('contactNo'),$request->input('password'));
         }elseif($request->input('user')=='driver'){
             $user=new Driver;
-            $user->changePassword($request->input('contactNo'),$request->input('password'));
+            return $user->changePassword($request->input('contactNo'),$request->input('password'));
         }
     }
 

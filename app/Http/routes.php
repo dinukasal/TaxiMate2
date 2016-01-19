@@ -44,6 +44,12 @@ Route::get('login','LoginController@login');
 
 Route::get('drivers','DriverController@getAll');
 
+Route::post('getdriverprofile','DriverController@getProfile');
+
+Route::post('updatedriverprofile','DriverController@updateProfile');
+
+Route::post('getdriver','DriverController@getDriver');
+
 Route::post('register','UserController@registerUser');
 
 Route::post('updateuser','UserController@registerUser');
