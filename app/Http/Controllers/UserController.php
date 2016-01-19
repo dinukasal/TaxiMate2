@@ -19,7 +19,7 @@ class UserController extends Controller
     		$user->nic=$request->input('nic');
     		$user->contactNo=$request->input('contactNo');
     		$user->password=$request->input('password');
-    		$user->savePassenger();
+    		$user->savePassenger($user);
 
     	}elseif($request->input('user')=='driver'){
     		$user=new Driver;
@@ -34,7 +34,17 @@ class UserController extends Controller
         if($request->input('user')=='passenger'){
             return Passenger::getPassenger($request->contactNo);
         }elseif($request->input('user')=='driver'){
-            return Driver::getDriver($request->contactNo);
+            return Driver::getDriver($request->input('contactNo'));
         }
     }
+    public function changePassword(Request $request){
+        if($request->input('user')=='passenger'){
+            $user=new Passenger;
+            $user->changePassword($request->input('contactNo'),$request->input('password'));
+        }elseif($request->input('user')=='driver'){
+            $user=new Driver;
+            $user->changePassword($request->input('contactNo'),$request->input('password'));
+        }
+    }
+
 }

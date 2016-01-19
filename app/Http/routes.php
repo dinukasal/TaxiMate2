@@ -48,8 +48,11 @@ Route::post('register','UserController@registerUser');
 
 Route::post('updateuser','UserController@registerUser');
 
+Route::post('changePassword','UserController@changePassword');
+
 Route::post('getuser','UserController@getUser');
 
 Route::post('checkavailability','DriverController@checkAvailability');
 
 Route::post('updaterates','DriverController@updateRates');
+

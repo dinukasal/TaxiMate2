@@ -51,4 +51,14 @@ class Driver extends Model
     		return 'no user with contactNo:'.$contactNo;
     	}
     }
+    public function changePassword($contactNo,$password){
+    	$changed=DB::update('UPDATE driver SET password=\''.$password
+    				.'\' WHERE contactNo=\''.$contactNo.'\''
+    		);
+    	if($changed){
+    		return 1;
+    	}else{
+    		return 0;
+    	}
+    }
 }

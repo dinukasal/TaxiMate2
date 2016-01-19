@@ -7,5 +7,7 @@ use DB;
 
 class Hire extends Model
 {
-    
+	public function setHire(){
+		
+	}
 }

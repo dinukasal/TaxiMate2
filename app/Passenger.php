@@ -17,9 +17,9 @@ class Passenger extends Model
 								contactNo=\''.$passenger->contactNo.'\'
 								');
 				if($affected){
-					return 'ok';
+					return 1;
 				}else{
-					return 'error';
+					return 0;
 				}
 		}else{
 			DB::insert('INSERT INTO passenger (id,firstName
@@ -37,5 +37,15 @@ class Passenger extends Model
     public function getPassenger($contactNo){
     	$user=DB::select('SELECT * from passenger where contactNo=\''.$contactNo.'\'');
     	return $user;
+    }
+    public function changePassword($contactNo,$password){
+    	$changed=DB::update('UPDATE passenger SET password=\''.$password
+    				.'\' WHERE contactNo=\''.$contactNo.'\''
+    		);
+    	if($changed){
+    		return 1;
+    	}else{
+    		return 0;
+    	}
     }
 }

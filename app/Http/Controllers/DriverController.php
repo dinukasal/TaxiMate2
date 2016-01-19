@@ -17,10 +17,10 @@ class DriverController extends Controller
     }
     public function checkAvailability(Request $request){
     	$driver=new Driver;
-    	$availability=$driver->checkAvailability($request->contactNo)[0]->availability;
+    	$availability=$driver->checkAvailability($request->input('contactNo'))[0]->availability;
     	return $availability;
     }
     public function updateRates(Request $request){
-
+    	
     }
 }
