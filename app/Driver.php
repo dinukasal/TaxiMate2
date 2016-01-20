@@ -107,4 +107,7 @@ class Driver extends Model
     		return 0;
     	}
     }
+    public function getAvailableDrivers(){
+    	return DB::select('SELECT id,firstName,lastName,contactNo from driver WHERE availability="1"');
+    }
 }

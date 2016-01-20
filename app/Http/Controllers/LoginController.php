@@ -19,20 +19,20 @@ class LoginController extends Controller
 		$contactNo=$request->input('contactNo');
 		$password=$request->input('password');
 
-		$user=DB::select('SELECT firstName FROM '.$user.' WHERE contactNo=\''.
+		$loggedUser=DB::select('SELECT firstName FROM '.$user.' WHERE contactNo=\''.
 			$contactNo.'\''
 			);
-		if($user){
-			$user=DB::select('SELECT firstName FROM '.$user.' WHERE contactNo=\''.
+		if($loggedUser){
+			$loggedUser=DB::select('SELECT firstName FROM '.$user.' WHERE contactNo=\''.
 			$contactNo.'\' AND password=\''.$password."'"
 			);
-			if($user){
-				return $user[0]->firstName;
+			if($loggedUser){
+				return response('1')->header('Access-Control-Allow-Origin','*');
 			}else{
-				return -1;
+				return response('0')->header('Access-Control-Allow-Origin','*');
 			}
 		}else{
-			return 0;
+				return response('-1')->header('Access-Control-Allow-Origin','*');
 		}
 	}
 }

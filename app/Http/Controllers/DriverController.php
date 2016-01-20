@@ -40,4 +40,11 @@ class DriverController extends Controller
 	    $driver=new Driver;
         return $driver->updateRates($request->input('contactNo'),['specialFare'=>'123']);
     }
+    public function getAvailableDrivers(){
+        $driver=new Driver;
+        return $driver->getAvailableDrivers();
+    }
+    public function requestTaxi(Request $request){
+
+    }
 }

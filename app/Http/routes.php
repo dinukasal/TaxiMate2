@@ -62,3 +62,6 @@ Route::post('checkavailability','DriverController@checkAvailability');
 
 Route::post('updaterates','DriverController@updateRates');
 
+Route::post('requesttaxi','DriverController@requestTaxi');
+
+Route::get('availabledrivers','DriverController@getAvailableDrivers');

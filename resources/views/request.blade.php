@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-	<form method="post" action="{{ url('/updaterates') }}">
+	<form method="post" action="{{ url('/login') }}">
 		<label>first name</label>
 		<input name="firstName" type="text"></input>
 		<label>second name</label>
